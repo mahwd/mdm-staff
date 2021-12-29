@@ -1,0 +1,4 @@
+export const types = {
+    UPDATE_SNACK: "UPDATE_SNACK_ACTION",
+    SET_LOADING: "SET_LOADING_ACTION",
+}

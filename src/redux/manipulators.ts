@@ -1,0 +1,4 @@
+export const manipulators = {
+    UPDATE_SNACK_MAN: "UPDATE_SNACK_MANIPULATOR",
+    SET_LOADING_MAN: "SET_LOADING_MANIPULATOR"
+}
