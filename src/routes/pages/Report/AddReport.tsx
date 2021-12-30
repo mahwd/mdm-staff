@@ -41,9 +41,7 @@ const AddReport: FC<TAddReport> = (props) => {
     const navigate = useNavigate();
     const {register, handleSubmit, formState: {errors}, reset} = useForm();
     const [report, setReport] = useState<Report>({} as Report)
-    const [tasks, setTasks] = useState<Task[]>([])
     const reportsRef = collection(db, "reports").withConverter(reportConvertor);
-    const tasksRef = collection(db, "tasks").withConverter(taskConvertor);
 
     useEffect(() => {
 
@@ -81,25 +79,6 @@ const AddReport: FC<TAddReport> = (props) => {
             unsubReports();
         }
     }, [user]);
-
-    // useEffect(() => {
-    //     if (isEmpty(report)) return;
-    //     const taskQuery = query(
-    //         tasksRef,
-    //         where("report_id", "==", report.id),
-    //         orderBy("date", "asc")
-    //     )
-    //     const unsubscribe = onSnapshot(taskQuery, async (snap) => {
-    //         if (!snap.empty) {
-    //             const _tasks = snap.docs.map(doc => doc.data())
-    //             console.log("tasks: ", _tasks)
-    //             setTasks(_tasks)
-    //         }
-    //     })
-    //     return () => {
-    //         unsubscribe()
-    //     };
-    // }, [report]);
 
 
     const submitTask = async ({content, is_done}: { content: string, is_done: boolean }) => {

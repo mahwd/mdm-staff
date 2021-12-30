@@ -9,13 +9,14 @@ import {
     Typography
 } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {TaskAlt} from "@mui/icons-material";
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import {useNavigate} from "react-router-dom";
 import ListTasks from "./ListTasks";
 import {collection, query, onSnapshot, where, doc, FirestoreDataConverter} from "firebase/firestore";
 import {db} from "../../../config/firebase.config";
 import Report, {reportConvertor} from '../../../models/Report';
 import {isEmpty} from "lodash";
+import {get_current_monday} from "../../../config/helpers";
 
 const Reports = () => {
 
@@ -43,6 +44,12 @@ const Reports = () => {
 
     }, [user]);
 
+    const isEditable = (date: Date) => {
+        const monday = get_current_monday()
+        const diffTime = Math.abs(date - monday);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    }
 
     return (
         <>
@@ -60,13 +67,31 @@ const Reports = () => {
                                         alignItems: "center"
                                     }}
                                 >
-                                    <Typography sx={{width: '33%', flexShrink: 0}}>
-                                        Hesabat
-                                    </Typography>
-                                    <Typography
-                                        sx={{color: 'text.secondary'}}>{report.date.toDateString()}
-                                    </Typography>
-                                    <Button color={"primary"}>Edit</Button>
+                                    <table width={"100%"}>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <Typography sx={{width: '33%', flexShrink: 0}}>
+                                                    Hesabat
+                                                </Typography>
+                                            </td>
+                                            <td>
+                                                <Typography sx={{color: 'text.secondary'}}>
+                                                    {report.date.toDateString()}
+                                                </Typography>
+                                            </td>
+                                            <td>
+                                                <Button color={"secondary"}
+                                                        variant={"contained"}
+                                                        startIcon={<EditRoundedIcon/>}
+                                                        onClick={()=>navigate(`/reports/${report.id}`)}
+                                                >
+                                                    Edit
+                                                </Button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     <ListTasks report_id={report.id} show_actions={false}/>
