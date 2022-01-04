@@ -8,7 +8,7 @@ import {
     ListItemText,
     Typography,
     TextField,
-    FormControlLabel, Checkbox, Button
+    FormControlLabel, Checkbox, Button, Divider
 } from "@mui/material";
 import {TaskAlt, Delete, Edit, Done, Cancel} from "@mui/icons-material";
 import {
@@ -74,8 +74,9 @@ const ListTasks: FC<TListTasksProps> = ({report_id, show_actions}) => {
     return (
         <>
             <Typography variant={"h6"} align={"center"} color={"text.primary"}>
-                Görülmüş işlər
+                TASKS
             </Typography>
+            <Divider sx={{width: "100%", my: 4}}/>
             <Box sx={{
                 display: 'flex',
                 justifyContent: "left"
@@ -87,7 +88,10 @@ const ListTasks: FC<TListTasksProps> = ({report_id, show_actions}) => {
                                 <ListItem key={i}>
                                     <TaskRow task={task} report_doc={reportDoc} show_actions={show_actions}/>
                                 </ListItem>)
-                            : <h1>No task</h1>
+                            : <Typography variant={"h6"} align={"center"} color={"text.primary"}
+                                          sx={{textTransform: 'uppercase'}}>
+                                No task
+                            </Typography>
                     }
                 </List>
             </Box>

@@ -4,7 +4,7 @@ import Dashboard from './pages/Dashboard'
 import Layout from './pages/Layout'
 import Login from './pages/Login'
 import Reports from "./pages/Report/Reports";
-import AddReport from "./pages/Report/AddReport";
+import ReportDetail from "./pages/Report/ReportDetail";
 import {isEmpty} from "lodash";
 
 export interface INavigationProps {
@@ -12,6 +12,10 @@ export interface INavigationProps {
     path: string,
     element: ReactElement|null,
     children?: INavigationProps[]
+}
+
+export type MainNavigationProps = {
+
 }
 
 
@@ -39,25 +43,25 @@ const routes: INavigationProps[] = [
             {
                 id: 'report_detail',
                 path: ':report_id',
-                element: <AddReport/>
+                element: <ReportDetail/>
             },
         ]
     }
 ]
 
 
-function MainNavigation(props: INavigationProps) {
+function MainNavigation(props: MainNavigationProps) {
 
     return (
         <>
             <Routes>
                 <Route path={""} element={<Layout/>}>
                     {
-                        routes.map((route, index) => {
+                        routes.map((route) => {
                             if (isEmpty(route.children)) {
-                                return (<Route path={route.path} element={route.element} key={index}/>)
+                                return (<Route path={route.path} element={route.element} key={route.id}/>)
                             } else {
-                                return (<Route path={route.path}>
+                                return (<Route path={route.path} key={route.id}>
                                     {route.children?.map(childRoute => (
                                         <Route path={childRoute.path} element={childRoute.element} key={childRoute.id}/>
                                     ))}

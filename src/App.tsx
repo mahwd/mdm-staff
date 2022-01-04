@@ -46,26 +46,6 @@ function App() {
                     {snack.message}
                 </Alert>
             </Snackbar>
-            {/*{loading*/}
-            {/*&& <Box sx={{*/}
-            {/*    position: 'absolute',*/}
-            {/*    left: 0,*/}
-            {/*    top: 0,*/}
-            {/*    backgroundColor: 'rgba(255,255,255,.95)',*/}
-            {/*    zIndex: 1,*/}
-            {/*    width: '100vw',*/}
-            {/*    height: '100vh',*/}
-            {/*    display: 'flex',*/}
-            {/*    flexDirection: 'column',*/}
-            {/*    fontSize: 20,*/}
-            {/*    justifyContent: 'center',*/}
-            {/*    alignItems: 'center'*/}
-            {/*}}>*/}
-            {/*    <CircularProgress/>*/}
-            {/*    <Box sx={{*/}
-            {/*        marginTop: '10px',*/}
-            {/*    }}>Gözləyin</Box>*/}
-            {/*</Box>}*/}
             <MainNavigation/>
         </div>
     )
